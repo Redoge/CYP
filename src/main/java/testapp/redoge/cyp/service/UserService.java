@@ -1,59 +1,30 @@
-package app.redoge.resh.service;
+package testapp.redoge.cyp.service;
 
 
-import app.redoge.resh.entity.Role;
-import app.redoge.resh.entity.User;
-import app.redoge.resh.repository.RoleRepository;
-import app.redoge.resh.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
+import testapp.redoge.cyp.entity.User;
+import testapp.redoge.cyp.repository.UserRepository;
 
 @Service
 public class UserService {
-
     @Autowired
-    private UserRepository userDao;
+    UserRepository userRepository;
 
-    @Autowired
-    private RoleRepository roleDao;
-
-    @Autowired
-    private PasswordEncoder bCryptPasswordEncoder;
-
-
-    public Collection<? extends GrantedAuthority>  getAuthorizedUserRoles(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getAuthorities();
+    public void save(User user) {userRepository.save(user);}
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId).orElse(null);
     }
-
-    public void save(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleDao.findById(2L).orElse(null));
-        user.setRoles(roles);
-        if(userDao.findByUsername(user.getUsername())!=null) { //TODO: think up something
-            System.out.println("Username is used");
-//            throw new IllegalStateException("Username used");
-        }else{
-            userDao.save(user);
-        }
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username).orElse(null);
     }
-
-
-    public User findByUsername(String username) {
-        return userDao.findByUsername(username);
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
     }
-
-    public Object findById(Long id) {
-        return userDao.findById(id);
+    public Boolean existsByUsername(String username){
+        return userRepository.existsByUsername(username);
+    }
+    public Boolean existsByEmail(String email){
+        return userRepository.existsByEmail(email);
     }
 }

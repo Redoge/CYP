@@ -3,10 +3,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 import testapp.redoge.cyp.entity.User;
 import testapp.redoge.cyp.repository.UserRepository;
-
-public class UserDatailsServisImpl implements UserDetailsService{
+@Service
+public class UserDatailsServiseImpl implements UserDetailsService{
     @Autowired
     UserRepository userRepository;
 
