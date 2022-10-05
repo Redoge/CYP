@@ -17,6 +17,15 @@ public class User {
         this.password = password;
         this.email = email;
     }
+    public User(String username, String email, String password,  String firstName, String lastName, String phoneNumber, int money) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.money = BigDecimal.valueOf(money);
+    }
     public User() {
 
     }
@@ -39,11 +48,11 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<UserRole> roles = new HashSet<>();
-
+    @Column(nullable = false, length = 30)
     private String firstName;
-
+    @Column( nullable = false, length = 50)
     private String lastName;
-
+    @Column(nullable = false, length = 13, unique = true)
     private String phoneNumber;
 
     private BigDecimal money;

@@ -19,6 +19,7 @@ import java.util.List;
 public class MainAdminController {
 
     @GetMapping("/all")
+    @PreAuthorize("permitAll()")//TODO: dont work and need fix it
     public String getAll(){
         return "public API";
     }

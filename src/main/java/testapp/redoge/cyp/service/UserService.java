@@ -27,4 +27,5 @@ public class UserService {
     public Boolean existsByEmail(String email){
         return userRepository.existsByEmail(email);
     }
+    public Boolean existsByPhoneNumber(String phoneNumber){return userRepository.existsByPhoneNumber(phoneNumber);}
 }

@@ -79,20 +79,30 @@ public class AuthController {
                     .badRequest()
                     .body(new MessageResponse("Error: Email is exist"));
         }
+        if(userService.existsByPhoneNumber(signupRequest.getPhoneNumber())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Phone number is exist"));
+        }
 
         User user = new User(signupRequest.getUsername(),
                 signupRequest.getEmail(),
-                passwordEncoder.encode(signupRequest.getPassword()));
+                passwordEncoder.encode(signupRequest.getPassword()),
+                signupRequest.getFirstName(),
+                signupRequest.getLastName(),
+                signupRequest.getPhoneNumber(),
+                0);
 
         Set<String> reqRoles = signupRequest.getRoles();
         Set<UserRole> roles = new HashSet<>();
         for(String rolesName: reqRoles){
             UserRole role = userRoleServise.getByName(rolesName);
-            System.out.println(role);
             if(role != null){
                 roles.add(role);
             }else{
-                throw new RuntimeException("Role " + rolesName + " not found");
+                return ResponseEntity
+                        .badRequest()
+                        .body(new MessageResponse("Error: Role " + rolesName + " not found"));
             }
         }
         user.setRoles(roles);

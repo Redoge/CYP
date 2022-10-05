@@ -2,6 +2,7 @@ package testapp.redoge.cyp.pojo;
 
 import testapp.redoge.cyp.entity.UserRole;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 public class SignupRequest {
@@ -9,6 +10,14 @@ public class SignupRequest {
     private String email;
     private Set<String> roles;
     private String password;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String phoneNumber;
+
+    private BigDecimal money;
 
     public String getUsername() {
         return username;
@@ -42,6 +51,38 @@ public class SignupRequest {
         this.password = password;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public BigDecimal getMoney() {
+        return money;
+    }
+
+    public void setMoney(BigDecimal money) {
+        this.money = money;
+    }
+
     @Override
     public String toString() {
         return "SignupRequest{" +
@@ -49,6 +90,10 @@ public class SignupRequest {
                 ", email='" + email + '\'' +
                 ", roles=" + roles +
                 ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", money=" + money +
                 '}';
     }
 }
