@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import testapp.redoge.cyp.entity.User;
 import testapp.redoge.cyp.repository.UserRepository;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -28,4 +30,5 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
     public Boolean existsByPhoneNumber(String phoneNumber){return userRepository.existsByPhoneNumber(phoneNumber);}
+    public List<User> getAll(){return userRepository.findAll();}
 }

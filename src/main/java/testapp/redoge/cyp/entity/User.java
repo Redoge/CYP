@@ -1,5 +1,8 @@
 package testapp.redoge.cyp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -38,6 +41,7 @@ public class User {
     private String username;
 
     @Column(name = "password", nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(name = "email", nullable = false)
@@ -57,9 +61,11 @@ public class User {
 
     private BigDecimal money;
 
-//    private List<Order> orderAsCustomer; //TODO: do this
-//
-//    private List<Order> orderAsEmployee;
+    @OneToMany(mappedBy = "customerUser")
+    private List<Order> orderAsCustomer;
+
+    @OneToMany(mappedBy = "employeeUser")
+    private List<Order> orderAsEmployee;
 
 
 
@@ -102,5 +108,37 @@ public class User {
 
     public void setRoles(Set<UserRole> roles) {
         this.roles = roles;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public BigDecimal getMoney() {
+        return money;
+    }
+
+    public void setMoney(BigDecimal money) {
+        this.money = money;
     }
 }

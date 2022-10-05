@@ -1,6 +1,7 @@
 package testapp.redoge.cyp.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Street {
@@ -10,4 +11,7 @@ public class Street {
     private Long id;
     @Column(name = "name", nullable = false)
     private String name;
+    @ManyToOne
+    @JoinColumn(name= "city_id", nullable = false)
+    private City cities;
 }

@@ -1,11 +1,8 @@
 package testapp.redoge.cyp.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
-//TODO: entity
+@Entity
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,5 +10,6 @@ public class City {
     private Long id;
     @Column(name = "name", nullable = false)
     private String name;
+    @OneToMany(mappedBy ="cities")
     private List<Street> streets;
 }
