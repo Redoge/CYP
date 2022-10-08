@@ -16,14 +16,11 @@ import testapp.redoge.cyp.pojo.JwtResponse;
 import testapp.redoge.cyp.pojo.LoginRequest;
 import testapp.redoge.cyp.pojo.MessageResponse;
 import testapp.redoge.cyp.pojo.SignupRequest;
-import testapp.redoge.cyp.repository.UserRepository;
-import testapp.redoge.cyp.repository.UserRoleRepository;
 import testapp.redoge.cyp.service.UserDetailsImpl;
-import testapp.redoge.cyp.service.UserRoleServise;
+import testapp.redoge.cyp.service.UserRoleService;
 import testapp.redoge.cyp.service.UserService;
 
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -37,7 +34,7 @@ public class AuthController {
     @Autowired
     UserService userService;
     @Autowired
-    UserRoleServise userRoleServise;
+    UserRoleService userRoleService;
     @Autowired
     PasswordEncoder passwordEncoder;
     @Autowired
@@ -96,7 +93,7 @@ public class AuthController {
         Set<String> reqRoles = signupRequest.getRoles();
         Set<UserRole> roles = new HashSet<>();
         for(String rolesName: reqRoles){
-            UserRole role = userRoleServise.getByName(rolesName);
+            UserRole role = userRoleService.getByName(rolesName);
             if(role != null){
                 roles.add(role);
             }else{

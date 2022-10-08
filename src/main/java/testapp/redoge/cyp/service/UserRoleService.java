@@ -6,10 +6,9 @@ import testapp.redoge.cyp.entity.UserRole;
 import testapp.redoge.cyp.repository.UserRoleRepository;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
-public class UserRoleServise {
+public class UserRoleService {
 
     @Autowired
     UserRoleRepository userRoleRepository;

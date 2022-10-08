@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import testapp.redoge.cyp.entity.User;
 import testapp.redoge.cyp.repository.UserRepository;
 @Service
-public class UserDatailsServiseImpl implements UserDetailsService{
+public class UserDatailsServiceImpl implements UserDetailsService{
     @Autowired
     UserRepository userRepository;
 
