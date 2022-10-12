@@ -1,10 +1,9 @@
 package testapp.redoge.cyp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 import testapp.redoge.cyp.entity.User;
 import testapp.redoge.cyp.entity.UserRole;
 import testapp.redoge.cyp.service.UserRoleService;
@@ -30,5 +29,11 @@ public class AdminController {
     @GetMapping(value = "/role", produces = APPLICATION_JSON_VALUE)
     public List<UserRole> allRole(){return userRoleService.getAll();}
 
+    @PostMapping("/roles")
+//    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> addRole(@RequestBody UserRole userRole){
+        userRoleService.addRole(userRole);
+        return ResponseEntity.ok(userRole);
+    }
 
 }

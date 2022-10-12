@@ -20,4 +20,6 @@ public class UserRoleService {
     public UserRole getById(Long id){return userRoleRepository.findById(id).orElse(null);}
 
     public UserRole getByName(String name){return userRoleRepository.findByName(name).orElse(null);}
+
+    public void addRole(UserRole role){userRoleRepository.save(role);}
 }
