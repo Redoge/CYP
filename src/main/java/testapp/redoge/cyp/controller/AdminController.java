@@ -30,7 +30,6 @@ public class AdminController {
     public List<UserRole> allRole(){return userRoleService.getAll();}
 
     @PostMapping("/roles")
-//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> addRole(@RequestBody UserRole userRole){
         userRoleService.addRole(userRole);
         return ResponseEntity.ok(userRole);

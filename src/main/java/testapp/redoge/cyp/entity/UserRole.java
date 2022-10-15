@@ -14,8 +14,8 @@ public class UserRole {
     @Column(name="name", nullable=false, length = 25, unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    public List<User> users;
+//    @ManyToMany(mappedBy = "roles") //TODO: stackoverflow
+//    public List<User> users;
     public Long getId() {
         return id;
     }
@@ -32,11 +32,11 @@ public class UserRole {
         this.name = name;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
+//    public List<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(List<User> users) {
+//        this.users = users;
+//    }
 }
