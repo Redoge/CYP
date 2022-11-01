@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,11 +16,6 @@ import java.util.Set;
         @UniqueConstraint(columnNames = "email")
 })
 public class User {
-    public User(String username,  String email,String password) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
     public User(String username, String email, String password,  String firstName, String lastName, String phoneNumber, int money) {
         this.username = username;
         this.password = password;
@@ -59,6 +55,8 @@ public class User {
     @Column(nullable = false, length = 13, unique = true)
     private String phoneNumber;
 
+    @Column(name = "registered", nullable = false)
+    private Timestamp registered;
     private BigDecimal money;
 
     @OneToMany(mappedBy = "customerUser")
@@ -67,8 +65,8 @@ public class User {
     @OneToMany(mappedBy = "employeeUser")
     private List<Order> orderAsEmployee;
 
-
-
+    @Column(name="enabled")
+    private boolean isEnabled;
 
     public Long getId() {
         return id;
@@ -140,5 +138,36 @@ public class User {
 
     public void setMoney(BigDecimal money) {
         this.money = money;
+    }
+
+    public Timestamp getRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(Timestamp registered) {
+        this.registered = registered;
+    }
+
+    public List<Order> getOrderAsCustomer() {
+        return orderAsCustomer;
+    }
+
+    public void setOrderAsCustomer(List<Order> orderAsCustomer) {
+        this.orderAsCustomer = orderAsCustomer;
+    }
+
+    public List<Order> getOrderAsEmployee() {
+        return orderAsEmployee;
+    }
+    public void setOrderAsEmployee(List<Order> orderAsEmployee) {
+        this.orderAsEmployee = orderAsEmployee;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 }

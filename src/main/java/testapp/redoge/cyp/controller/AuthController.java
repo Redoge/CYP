@@ -20,13 +20,15 @@ import testapp.redoge.cyp.service.UserDetailsImpl;
 import testapp.redoge.cyp.service.UserRoleService;
 import testapp.redoge.cyp.service.UserService;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Controller
-@RequestMapping("/api/auth")
+@RestController
+@RequestMapping("/api/v1/auth")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class AuthController {
     @Autowired
@@ -64,7 +66,7 @@ public class AuthController {
                 ));
     }
 
-    @GetMapping("/register")
+    @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody SignupRequest signupRequest){
         if(userService.existsByUsername(signupRequest.getUsername())){
             return ResponseEntity
@@ -103,6 +105,8 @@ public class AuthController {
             }
         }
         user.setRoles(roles);
+        user.setRegistered(Timestamp.valueOf(LocalDateTime.now()));
+        user.setEnabled(true);
         userService.save(user);
         return ResponseEntity.ok(new MessageResponse("User "+user.getUsername()+" CREATED"));
     }

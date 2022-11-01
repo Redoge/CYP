@@ -2,20 +2,24 @@ version: "3.7"
 services:
   api_service:
     build: .
-    command: 'java -jar target/CYP-0.0.1-SNAPSHOT.jar'
+    command: "java -jar /target/CYP-0.0.1-SNAPSHOT.jar"
+    restart: always
     ports:
       - "8080:8080"
     depends_on:
       - mysql_db
+#    restart: always
     environment:
       - MYSQL_DATABASE=testRest
       - MYSQL_USER=redoge
       - MYSQL_PASSWORD=redoge1670
-      - MYSQL_ROOT_PASSWORD=redoge1670
+      - MYSQL_ROOT_PASSWORD=admin
       - MYSQL_PORT=3306
 
+
+
   mysql_db:
-   image: mysql:8.0
+   image: mysql:latest
    ports:
      - "3306:3306"
    environment:

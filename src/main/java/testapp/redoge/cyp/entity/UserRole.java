@@ -1,11 +1,21 @@
 package testapp.redoge.cyp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name="user_roles")
 public class UserRole {
+
+    public UserRole() {
+    }
+
+    public UserRole(String name) {
+        this.name = name;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -14,8 +24,6 @@ public class UserRole {
     @Column(name="name", nullable=false, length = 25, unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    public List<User> users;
     public Long getId() {
         return id;
     }
@@ -32,11 +40,11 @@ public class UserRole {
         this.name = name;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    @Override
+    public String toString() {
+        return "UserRole{" +
+                "id=" + id +
+                ", name='" + name + '\'';
     }
 }

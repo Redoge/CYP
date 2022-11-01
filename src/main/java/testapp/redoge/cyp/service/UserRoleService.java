@@ -17,6 +17,8 @@ public class UserRoleService {
         return userRoleRepository.findAll();
     }
 
+    public Boolean existsByName(String name){return userRoleRepository.existsByName(name);}
+
     public UserRole getById(Long id){return userRoleRepository.findById(id).orElse(null);}
 
     public UserRole getByName(String name){return userRoleRepository.findByName(name).orElse(null);}
