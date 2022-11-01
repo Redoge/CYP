@@ -36,7 +36,6 @@ public class AdminController {
     public List<User> allUser(){return userService.getAll();}
 
     @PostMapping("/roles")
-//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> addRole(@RequestBody UserRole userRole){
         if(userRoleService.existsByName(userRole.getName())){
             return ResponseEntity
